@@ -1,0 +1,1 @@
+In the UMCS competition I'm honored to be an author for a 1 Steganography , 1 Forensic challenge. Here is the writeups 
