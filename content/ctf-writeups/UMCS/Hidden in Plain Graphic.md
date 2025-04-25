@@ -5,12 +5,12 @@ Scenario : Agent Ali, who are secretly a spy from Malaysia has been communicate 
 ## Solution
 1. Open the PCAP file using WireShark 
 2. By filtering the packet length . I can see there is only one packet that are so large compare to others
-![[../images/Pasted image 20250308111803.png]]
+![../images/Pasted image 20250308111803.png](../images/Pasted%20image%2020250308111803.png)
 3. Lets try follow the stream by clicking Follow>TCP Stream
-![[../images/Pasted image 20250308111910.png]]
+![../images/Pasted image 20250308111910.png](../images/Pasted%20image%2020250308111910.png)
 4. I see there is a PNG inside . Maybe we should extract it 
 5. By Clicking Show as and choose RAW . We can save this file as .PNG
-6. ![[../images/Pasted image 20250308111543.png]]
+6. ![../images/Pasted image 20250308111543.png](../images/Pasted%20image%2020250308111543.png)
 7. Lets try to run zsteg to see if there any hidden message there
 > [!NOTE]- zsteg example
 > ```

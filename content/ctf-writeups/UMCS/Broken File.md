@@ -7,7 +7,7 @@ You’re a cybersecurity analyst working for a news agency. During a live broadc
 ### **Step 1: Initial Analysis**
 1. **Attempting to Open the File**  
    When trying to open the video, an error occurred, indicating the file might be corrupted or in an unexpected format.
-![[../images/Pasted image 20250321190151.png]]
+![../images/Pasted image 20250321190151.png](../images/Pasted%20image%2020250321190151.png)
 
 
 2. **File Type Identification**  
@@ -90,7 +90,7 @@ Clue : Rumor also said that this hacker is capable of corrupting the  file by ju
  ```
 flag: umcs{h1dd3n_1n_fr4m3}
 ```
-![[../images/Pasted image 20250328165214.png]]
+![../images/Pasted image 20250328165214.png](../images/Pasted%20image%2020250328165214.png)
 ---
 
 ### **Tools Used**
@@ -109,4 +109,4 @@ umcs{h1dd3n_1n_fr4m3}
 
 ### Extra :
 
-![[../images/Pasted image 20250327181944.png]]MP4 File Structure
+![../images/Pasted image 20250327181944.png](../images/Pasted%20image%2020250327181944.png)MP4 File Structure

@@ -1,7 +1,7 @@
 ### Sapu Driver
 #### Category : `Web`
 
-![[Pasted image 20250421164807.png]]
+![Pasted image 20250421164807.png](../images/Pasted%20image%2020250421164807.png)
 First i play around with the inspect tool . I found the script.js
 
 > [!NOTE]- script.js
@@ -63,7 +63,7 @@ This is interesting since it fetch the data in the API . I try to look at the AP
 Since we dealt with API . I opened my [Postman](https://web.postman.co/) . I try to change the GET to POST and others method but all method is not allow. Then maybe it has other API point?
 
 I try https://sapudriverapi.horizononsight.xyz/api/flag
-![[Pasted image 20250423001905.png]]
+![Pasted image 20250423001905.png](../images/Pasted%20image%2020250423001905.png)
 It got unauthorized access . Okay we are close . How to get access
 
 I try https://sapudriverapi.horizononsight.xyz/api/login and paste this json file
@@ -83,11 +83,11 @@ Flag : Hunt{3a5y_m4ss_4ss1gnm3nt}
 ### DNS : Do Not Sleep
 #### Category : `Forensics`
 
-![[Pasted image 20250421165739.png]]
+![Pasted image 20250421165739.png](../images/Pasted%20image%2020250421165739.png)
 
 It gave us a `.pcap File ` so i opened in WireShark
 
-![[Pasted image 20250421165940.png]]
+![Pasted image 20250421165940.png](../images/Pasted%20image%2020250421165940.png)
 when we view the packet we can see there . Then copy the value and paste in my favorite decoder Cyberchef.io
 
 ```
@@ -106,7 +106,7 @@ And we get the Flag : `Hunt{4DN5_3xfi4ltra4ti0n}`
 ---
 ### Simple CrackMe
 #### Category : `Reverse Engineering`
-![[Pasted image 20250421170709.png]]
+![Pasted image 20250421170709.png](../images/Pasted%20image%2020250421170709.png)
 
 Since this is reverse i Opened my disassembler which is Cutter 
 
@@ -159,7 +159,7 @@ Flag : Hunt{a3465d55ee234ba_crackme}
 ---
 ### Save Ali From Deadline
 #### Category : `Forensic`
-![[Pasted image 20250421171553.png]]
+![Pasted image 20250421171553.png](../images/Pasted%20image%2020250421171553.png)
 
 when we unzip the file and cd to the ctf-repo
 
@@ -226,7 +226,7 @@ Flag : Hunt{G1t_1s_sup3rrrrr_Aw3s0me}
 ---
 ### Traffic Light
 #### Category : `Cryptography`
-![[Pasted image 20250422162244.png]]
+![Pasted image 20250422162244.png](../images/Pasted%20image%2020250422162244.png)
 
 the link direct us to youtube short video where there is a number with changing red and green background . My first thought is to exchange the color to binary
 
@@ -248,7 +248,7 @@ Flag : HUNT{HACKMYLIFE}
 ---
 ### Get The Flag
 #### Category : `Reverse Engineering`
-### ![[Pasted image 20250422162918.png]]
+### ![Pasted image 20250422162918.png](../images/Pasted%20image%2020250422162918.png)
 
 #### File Analysis
 
@@ -288,7 +288,7 @@ Unpacked 1 file.
 
 Okay lets analyze with redare again. Alright this time we got a lot more familiar function and readeable code . After that i fire up my Cutter to look to inspect the main function
 
-![[Pasted image 20250422164159.png]]
+![Pasted image 20250422164159.png](../images/Pasted%20image%2020250422164159.png)
 This function first compare the input whether = "Hunt{"
 
 and then it check whether it has the length of 0x18(24 in decimal) 
@@ -298,7 +298,7 @@ So the format is like this : Hunt{xxxxxxxx_xxxx_xxxx}
 
 Alright Lets play around with Cutter more to find more information. In the strings section I found some word that might be the flag
 
-![[Pasted image 20250422164636.png]]
+![Pasted image 20250422164636.png](../images/Pasted%20image%2020250422164636.png)
 Let try and error and submit the flag to the program. And we got the flag
 
 ```
@@ -317,7 +317,7 @@ Flag : Hunt{Princess_Mahe_Deva}
 ---
 ### Can you Reverse it ?
 #### Category : `Reverse Engineering`
-![[Pasted image 20250422164917.png]]
+![Pasted image 20250422164917.png](../images/Pasted%20image%2020250422164917.png)
 
 we were provided with text file which is weird for RE challenge so i try to view it and saw a lot of A so i try to remove it and make it executable .Unfortunately that didnt work . I notice there is == in the file so maybe it is base 64. 
 
@@ -396,7 +396,7 @@ Flag : hunt{gdg3_haha_3_w1y5_t0_lai_cai}
 ---
 ### BrainF''k
 #### Category : `Reverse Engineering`
-![[Pasted image 20250422234758.png]]
+![Pasted image 20250422234758.png](../images/Pasted%20image%2020250422234758.png)
 
 
 We got a txt file below 
