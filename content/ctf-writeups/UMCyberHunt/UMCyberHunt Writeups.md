@@ -111,39 +111,41 @@ And we get the Flag : `Hunt{4DN5_3xfi4ltra4ti0n}`
 Since this is reverse i Opened my disassembler which is Cutter 
 
 in the main function i can see 
-```c
-undefined8 main(void)
-{
-    int32_t iVar1;
-    int64_t iVar2;
-    uint64_t uVar3;
-    uint64_t uVar4;
-    char *s1;
-    int64_t var_1ch;
-    int64_t var_10h;
-    
-    printf("Enter the password: ");
-    fgets(&s1, 100, _stdin);
-    iVar2 = strcspn(&s1, data.0000201d);
-    *(undefined *)((int64_t)&s1 + iVar2) = 0;
-    var_1ch._0_4_ = 0;
-    while( true ) {
-        uVar4 = (uint64_t)(int32_t)var_1ch;
-        uVar3 = strlen(&s1);
-        if (uVar3 <= uVar4) break;
-        *(uint8_t *)((int64_t)&s1 + (int64_t)(int32_t)var_1ch) =
-             *(uint8_t *)((int64_t)&s1 + (int64_t)(int32_t)var_1ch) ^ 5;
-        var_1ch._0_4_ = (int32_t)var_1ch + 1;
-    }
-    iVar1 = strcmp(&s1, "Mpkq~d6130a0`0``761gdZfwdfnh`x");
-    if (iVar1 == 0) {
-        puts("Correct! You cracked it!");
-    } else {
-        puts("Incorrect password.");
-    }
-    return 0;
-}
-```
+
+> [!NOTE]- main
+> ```c
+> undefined8 main(void)
+> {
+>     int32_t iVar1;
+>     int64_t iVar2;
+>     uint64_t uVar3;
+>     uint64_t uVar4;
+>     char *s1;
+>     int64_t var_1ch;
+>     int64_t var_10h;
+>     
+>     printf("Enter the password: ");
+>     fgets(&s1, 100, _stdin);
+>     iVar2 = strcspn(&s1, data.0000201d);
+>     *(undefined *)((int64_t)&s1 + iVar2) = 0;
+>     var_1ch._0_4_ = 0;
+>     while( true ) {
+>         uVar4 = (uint64_t)(int32_t)var_1ch;
+>         uVar3 = strlen(&s1);
+>         if (uVar3 <= uVar4) break;
+>         *(uint8_t *)((int64_t)&s1 + (int64_t)(int32_t)var_1ch) =
+>              *(uint8_t *)((int64_t)&s1 + (int64_t)(int32_t)var_1ch) ^ 5;
+>         var_1ch._0_4_ = (int32_t)var_1ch + 1;
+>     }
+>     iVar1 = strcmp(&s1, "Mpkq~d6130a0`0``761gdZfwdfnh`x");
+>     if (iVar1 == 0) {
+>         puts("Correct! You cracked it!");
+>     } else {
+>         puts("Incorrect password.");
+>     }
+>     return 0;
+> }
+> ```
 
 so it get your input in fgets() 
 and make some cryptography to your input 
@@ -163,10 +165,10 @@ Flag : Hunt{a3465d55ee234ba_crackme}
 
 when we unzip the file and cd to the ctf-repo
 
-i try ls 
+i try `ls`
 okay nothing
 
-Let's try ls -la
+Let's try `ls -la`
 
 ```
 ┌──(kali㉿kali)-[~/UMCyberHunt/Forensic/ctf-repo]
@@ -177,7 +179,7 @@ drwxrwxr-x 3 kali kali 4096 Apr 21 06:00 ..
 drwxrwxr-x 8 kali kali 4096 Apr  8 07:25 .git
 ```
 
-we can see there is git
+we can see there is `.git`
 
 so lets try see all log
 ```bash
@@ -334,62 +336,63 @@ After play around with redare and Cutter i notice that this function only has 2 
 
 Lets just copy the main and iterate_int() in the same file and prompt our AI to reverse it . After few hours trying it . the AI finally can do it an we got the flag
 
-```c
-#include <stdio.h>
-#include <stdint.h>
-#include <stdbool.h>
-
-static int count1 = 0;
-static int count2 = 0;
-
-// Transformation magic numbers
-const char magic[] = "RdqQTv\x01\x03\x04\x02\x06\x05";
-
-// Output from forward transform
-uint8_t transformed[] = {
-    0x34, 0x27, 0xcd, 0x10, 0xaf, 0x16, 0x19, 0x36, 0x98, 0x7d, 0x43, 0x17,
-    0x34, 0x33, 0xb3, 0xcc, 0xa6, 0x06, 0x1d, 0x28, 0x19, 0x7d, 0xa3, 0xc0,
-    0x85, 0x3e, 0x2c, 0x0d, 0xa6, 0x12, 0x58, 0x38, 0x0b
-};
-
-
-char reverse_byte(int index, uint8_t target_byte) {
-    for (int c = 0; c <= 127; ++c) {
-        if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_' || c == '{' || c == '}')) continue;
-
-        uint8_t uVar1 = (uint8_t)c;
-        bool bVar4 = (index & 1U) != 0;
-
-        uint8_t uVar2 = (uVar1 < 0x61 || 0x7a < uVar1) ? 0 : 1;
-
-        uint8_t result =
-            (-bVar4 & ((uVar1 >> 6 | uVar1 * 4) & -(uVar2 ^ 1)) +
-                      (-uVar2 & (magic[count1] ^ uVar1))) +
-            (-!bVar4 &
-             ((magic[count1] ^ (uVar1 >> 2 | uVar1 << 6)) & -(uVar2 ^ 1)) +
-             (-uVar2 & (uVar1 << (8U - magic[count2 + 6] & 0x1f) |
-                      (uint8_t)((int32_t)(uint32_t)uVar1 >>
-                              (magic[count2 + 6] & 0x1fU)))));
-
-        if (result == target_byte) {
-            count1 = ((int32_t)((uint32_t)bVar4 + count1)) % 6;
-            count2 = ((int32_t)((uint32_t)bVar4 + count2)) % 6;
-            return (char)c;
-        }
-    }
-    return '?'; // failed to reverse
-}
-
-
-int main(void) {
-    for (int i = 0; i < sizeof(transformed); i++) {
-        char c = reverse_byte(i, transformed[i]);
-        printf("%c", c);
-    }
-    printf("\n");
-    return 0;
-}
-```
+> [!NOTE]- reverse.c
+> ```c
+> #include <stdio.h>
+> #include <stdint.h>
+> #include <stdbool.h>
+> 
+> static int count1 = 0;
+> static int count2 = 0;
+> 
+> // Transformation magic numbers
+> const char magic[] = "RdqQTv\x01\x03\x04\x02\x06\x05";
+> 
+> // Output from forward transform
+> uint8_t transformed[] = {
+>     0x34, 0x27, 0xcd, 0x10, 0xaf, 0x16, 0x19, 0x36, 0x98, 0x7d, 0x43, 0x17,
+>     0x34, 0x33, 0xb3, 0xcc, 0xa6, 0x06, 0x1d, 0x28, 0x19, 0x7d, 0xa3, 0xc0,
+>     0x85, 0x3e, 0x2c, 0x0d, 0xa6, 0x12, 0x58, 0x38, 0x0b
+> };
+> 
+> 
+> char reverse_byte(int index, uint8_t target_byte) {
+>     for (int c = 0; c <= 127; ++c) {
+>         if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_' || c == '{' || c == '}')) continue;
+> 
+>         uint8_t uVar1 = (uint8_t)c;
+>         bool bVar4 = (index & 1U) != 0;
+> 
+>         uint8_t uVar2 = (uVar1 < 0x61 || 0x7a < uVar1) ? 0 : 1;
+> 
+>         uint8_t result =
+>             (-bVar4 & ((uVar1 >> 6 | uVar1 * 4) & -(uVar2 ^ 1)) +
+>                       (-uVar2 & (magic[count1] ^ uVar1))) +
+>             (-!bVar4 &
+>              ((magic[count1] ^ (uVar1 >> 2 | uVar1 << 6)) & -(uVar2 ^ 1)) +
+>              (-uVar2 & (uVar1 << (8U - magic[count2 + 6] & 0x1f) |
+>                       (uint8_t)((int32_t)(uint32_t)uVar1 >>
+>                               (magic[count2 + 6] & 0x1fU)))));
+> 
+>         if (result == target_byte) {
+>             count1 = ((int32_t)((uint32_t)bVar4 + count1)) % 6;
+>             count2 = ((int32_t)((uint32_t)bVar4 + count2)) % 6;
+>             return (char)c;
+>         }
+>     }
+>     return '?'; // failed to reverse
+> }
+> 
+> 
+> int main(void) {
+>     for (int i = 0; i < sizeof(transformed); i++) {
+>         char c = reverse_byte(i, transformed[i]);
+>         printf("%c", c);
+>     }
+>     printf("\n");
+>     return 0;
+> }
+> ```
 
 Flag : hunt{gdg3_haha_3_w1y5_t0_lai_cai}
 
@@ -397,7 +400,6 @@ Flag : hunt{gdg3_haha_3_w1y5_t0_lai_cai}
 ### BrainF''k
 #### Category : `Reverse Engineering`
 ![Pasted image 20250422234758.png](../images/Pasted%20image%2020250422234758.png)
-
 
 We got a txt file below 
 
@@ -445,47 +447,49 @@ Finding :
 
 Next Lets ask Cloude to write a parser and process the code for us
 
-```python
-def analyze_brainfuck_line(line):
-    # Parse the multiplication part
-    parts = line.split("[<")
-    outer_loop = parts[0].count("+")
-    
-    # Get the inner loop multiplier
-    inner_part = parts[1].split(">-]")[0]
-    inner_loop = inner_part.count("+")
-    
-    # Calculate the value created by the multiplication
-    multiplied_value = outer_loop * inner_loop
-    
-    # Count decrements
-    decrements_part = line.split("[-<+>]<")[1].split("[><]")[0]
-    decrements = decrements_part.count("-")
-    
-    # Calculate final value
-    final_value = (multiplied_value - decrements) % 256
-    
-    return {
-        "calculation": f"{outer_loop} × {inner_loop} = {multiplied_value}",
-        "decrements": decrements,
-        "final_value": final_value,
-        "hex": f"0x{final_value:02x}"
-    }
-```
+> [!NOTE]- analyze()
+> ```python
+> def analyze_brainfuck_line(line):
+>     # Parse the multiplication part
+>     parts = line.split("[<")
+>     outer_loop = parts[0].count("+")
+>     
+>     # Get the inner loop multiplier
+>     inner_part = parts[1].split(">-]")[0]
+>     inner_loop = inner_part.count("+")
+>     
+>     # Calculate the value created by the multiplication
+>     multiplied_value = outer_loop * inner_loop
+>     
+>     # Count decrements
+>     decrements_part = line.split("[-<+>]<")[1].split("[><]")[0]
+>     decrements = decrements_part.count("-")
+>     
+>     # Calculate final value
+>     final_value = (multiplied_value - decrements) % 256
+>     
+>     return {
+>         "calculation": f"{outer_loop} × {inner_loop} = {multiplied_value}",
+>         "decrements": decrements,
+>         "final_value": final_value,
+>         "hex": f"0x{final_value:02x}"
+>     }
+> ```
 
-```python
-def process_brainfuck(code):
-    lines = code.strip().split("\n")
-    byte_values = []
-    results = []
-    
-    for i, line in enumerate(lines, 1):
-        result = analyze_brainfuck_line(line)
-        byte_values.append(result["final_value"])
-        results.append((i, result))
-    
-    return byte_values, results
-```
+> [!NOTE]- process()
+> ```python
+> def process_brainfuck(code):
+>     lines = code.strip().split("\n")
+>     byte_values = []
+>     results = []
+>     
+>     for i, line in enumerate(lines, 1):
+>         result = analyze_brainfuck_line(line)
+>         byte_values.append(result["final_value"])
+>         results.append((i, result))
+>     
+>     return byte_values, results
+> ```
 
 After running the script we got this value . Lets ask Cloude any relation this value with our flag format which is Hunt{...}
 
