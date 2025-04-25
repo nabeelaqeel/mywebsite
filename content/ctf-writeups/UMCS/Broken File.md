@@ -30,7 +30,9 @@ You’re a cybersecurity analyst working for a news agency. During a live broadc
    Using an online hex editor (hexed.it), we we found the file started with a fake flag and corrupted header:
 
 ```mathematica
-00000000 63 74 66 7B 74 68 69 73 20 69 73 20 6E 6F 74 20 ctf{this is not 00000010 74 68 65 20 66 6C 61 67 7D 00 68 65 68 65 00 00 the flag}.hehe.. 00000020 02 00 69 73 6F 6D 69 73 6F 32 61 76 63 31 6D 70 ..isomiso2avc1mp
+00000000 63 74 66 7B 74 68 69 73 20 69 73 20 6E 6F 74 20 ctf{this is not
+00000010 74 68 65 20 66 6C 61 67 7D 00 68 65 68 65 00 00 the flag}.hehe..
+00000020 02 00 69 73 6F 6D 69 73 6F 32 61 76 63 31 6D 70 ..isomiso2avc1mp
 ```
 
 ### **Step 3: Repairing the File**
@@ -39,7 +41,8 @@ You’re a cybersecurity analyst working for a news agency. During a live broadc
 	- attach `ftypisom` header
 
 ```mathematica
-00000000 00 00 00 20 66 74 79 70 69 73 6F 6D 00 00 00 00 .. ftypisom... 00000010 69 73 6F 6D 69 73 6F 32 61 76 63 31 6D 70 34 31 isomiso2avclmp41 
+00000000 00 00 00 20 66 74 79 70 69 73 6F 6D 00 00 00 00 .. ftypisom... 
+00000010 69 73 6F 6D 69 73 6F 32 61 76 63 31 6D 70 34 31 isomiso2avclmp41 
 ```
 
 2. Fix the `moov` atom .  
