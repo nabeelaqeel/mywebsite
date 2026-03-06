@@ -35,7 +35,11 @@ export const defaultContentPageLayout: PageLayout = {
     //Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
-    Component.RecentNotes()
+    Component.RecentNotes({ 
+      title: "Latest Writeups", 
+      limit: 5,
+      filter: (f) => f.slug!.startsWith("ctf-writeups/") && f.slug! !== "index"
+}),
   ],
 }
 
